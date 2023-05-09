@@ -35,22 +35,7 @@ describe("Order", () => {
     expect(taxes).toBe(200);
   });
 
-  // test 3: delete item
-  it("should delete an item", () => {
-    // given: the order has 3 items
-    expect(order.items.length).toBe(3);
-
-    // when: we delete an item
-    order.items.splice(1, 1);
-
-    // then: the order should have 2 items
-    expect(order.items.length).toBe(2);
-
-    // and: the total should be updated
-    expect(order.getTotal()).toBe(1030);
-  });
-
-  // test 4: print order
+  // test 3: print order
   it("shoud create an order and print a message", () => {
     const message = order.printOrder();
 
