@@ -1,4 +1,5 @@
 import { Item } from "./Item";
+import TaxItem from "./TaxItem";
 
 export class Order {
   items: Item[];
@@ -17,12 +18,10 @@ export class Order {
 
     // get each item from the items array and sum the taxes
     for (const item of this.items) {
-      //
-      if (item.name === "Guitarra") {
-        taxes += (item.price * 10) / 100;
-      }
-      if (item.name === "Amplificador") {
-        taxes += (item.price * 20) / 100;
+      // check if the item is a TaxItem, meaning it has a tax
+      if (item instanceof TaxItem) {
+        // calculate the tax and add it to the total
+        taxes += item.calculateTax();
       }
     }
 
@@ -34,9 +33,15 @@ export class Order {
 
     // get each item from the items array and sum the price
     for (const item of this.items) {
-      total += item.price;
+      total += item.price * item.quantity;
     }
 
     return total;
+  }
+
+  printOrder(): string {
+    const message = `Your order has been created. Total: ${this.getTotal()} and taxes: ${this.getTaxes()}. Thank you!`;
+
+    return message;
   }
 }
